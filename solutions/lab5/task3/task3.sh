@@ -36,3 +36,5 @@ ls -ltr collections/ansible_collections/
 rm -rf collections/ansible_collections/*
 ansible-galaxy collection list
 
+ansible-navigator --pp never
+:collections

@@ -56,8 +56,12 @@ Using Content Collections
    - f5networks.f5_modules from cloud.redhat.com/api/automation-hub
    - ansible.netcommon from galaxy.ansible.com
 -  Ensure the collections from requirements.yaml gets installed in the collections/ directory
--  Change the default collections path to collections/ and install a new collection nginxinc.nginx_core
+-  Change the default collections path to include the following paths and install a new collection nginxinc.nginx_core afterwards:
+   - ./collections
+   - ~/.ansible/collections
+   - /usr/share/ansible/collections
 -  After installing the collections, delete them
+-  Explore all the collections through ansible-navigator
 
 **Task 4**
 
