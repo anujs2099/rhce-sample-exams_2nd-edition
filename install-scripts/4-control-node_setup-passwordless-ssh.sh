@@ -5,7 +5,7 @@ echo ""
 whoami
 
 echo ""
-ssh-keygen -y
+ssh-keygen
 
 echo ""
 ssh-copy-id ansible1.example.com
