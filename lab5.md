@@ -59,12 +59,13 @@ Using Content Collections
    - /tmp/my-collection.tar.gz
    - http://www.example.local/my-collection.tar.gz
 -  Ensure the collections from requirements.yaml gets installed in the collections/ directory
--  Change the default collections path to include the following paths and install a new collection nginxinc.nginx_core afterwards:
+-  Ensure that the newly installed collections are also appearing in the ansible-navigator
+-  Change the default collections path to include the following paths and install a new collection 'nginxinc.nginx_core' afterwards:
    - ./collections
    - ~/.ansible/collections
    - /usr/share/ansible/collections
+-  Ensure that the newly installed collection 'nginxinc.nginx_core' are also appearing in the ansible-navigator
 -  After installing the collections, delete them
--  Explore all the collections through ansible-navigator
 
 **Task 4**
 

@@ -20,11 +20,15 @@ ansible-doc ansible.posix.selinux
 
 mkdir collections/
 vi collections/requirements.yaml
+
 ansible-galaxy collection install -h
 ansible-galaxy collection install -r collections/requirements.yaml -p collections/
 ansible-galaxy collection list
 ls -ltr collections/
 tree collections/ansible_collections/
+
+ansible-navigator --pp never
+:collections
 
 vi ansible.cfg 
 ansible-galaxy collection list
@@ -36,5 +40,3 @@ ls -ltr collections/ansible_collections/
 rm -rf collections/ansible_collections/*
 ansible-galaxy collection list
 
-ansible-navigator --pp never
-:collections
