@@ -64,7 +64,12 @@ Using help with Modules using the ansible-doc command
 
 -  List all the examples of using ping module
 -  Find out the mandatory arguments for copy module
--  Get help about the firewalld module. You would notice that it won't work as this module comes from a content collection that is not installed by default in ansible > 2.10
+-  Get help about the firewalld module. You would notice that it is not installed by default
+-  List all the roles you can get help for. You would notice that none are installed by default
+-  List all the filters you can get help for
+-  Get help about the password_hash filter
+-  List all the keywords (statements) you can get help for
+-  Get help about the delegate_to keyword (statement)
 
 **Task 5**
 
