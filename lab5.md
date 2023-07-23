@@ -43,7 +43,7 @@ Managing Order of Execution
 
 **Task 3**
 
-Using Collections
+Using Content Collections
 
 -  Project directory name is task3
 -  Use the inventory file & configuration file from lab1/task2
@@ -56,6 +56,7 @@ Using Collections
    - f5networks.f5_modules from cloud.redhat.com/api/automation-hub
    - ansible.netcommon from galaxy.ansible.com
 -  Ensure the collections from requirements.yaml gets installed in the collections/ directory
+-  Change the default collections path to collections/ and install a new collection nginxinc.nginx_core
 -  After installing the collections, delete them
 
 **Task 4**

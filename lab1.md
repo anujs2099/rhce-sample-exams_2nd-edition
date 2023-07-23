@@ -37,7 +37,7 @@ Ansible Configuration File
 
 **Task 3**
 
-Ansible Navigator
+Ansible Navigator & Getting help with it
 
 -  Use ansible-navigator as follows:
    - Project directory name is task3
@@ -60,7 +60,7 @@ Ansible Navigator
 
 **Task 4**
 
-Using help with Modules using the ansible-doc command
+Getting help with ansible-doc command
 
 -  List all the examples of using ping module
 -  Find out the mandatory arguments for copy module

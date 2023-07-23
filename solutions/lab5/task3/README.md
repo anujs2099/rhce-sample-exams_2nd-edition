@@ -82,10 +82,12 @@ $ tree myrole/
 - In ansible 2.9, collections are NOT a default part of Ansible. You would have to install individual collections
 - In ansible 2.10 and later, collections are installed by default
   - ansible-galaxy collection list
-- Content collections can be installed from different sources:
+- Collections can be installed from different sources:
   - galaxy.ansible.com
   - Ansible Automation Platform
   - Directly from tar archives
+- Regardless of whether you are using just Ansible Core or ansible-navigator in AAP, you will always have access to one content collection (ansible.builtin)
+- To get access to more collections, you may want to define and use a custom EE
 
 # Ansible-navigator
 - gets modules from content collections using its container-based execution environments (EEs)

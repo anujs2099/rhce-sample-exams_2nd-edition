@@ -1,3 +1,4 @@
+# Roles
 # Understanding Directory Structure Best Practices
 -  Project directory structure (example)
    - ~/myproject/ansible.cfg
@@ -63,6 +64,7 @@ $ tree myrole/
   - post_tasks
   - handlers
 
+# Content Collections
 # Content Collections include the following
 - modules
 - roles
@@ -78,14 +80,26 @@ $ tree myrole/
 - It takes a list of collections as its argument
 - After using the collections keyword, the collection itself can be addressed the old way. eg, selinux instead of ansible.posix.selinux
 
+# How to install Content Collections
+- galaxy.ansible.com
+  - ansible-galaxy collection install my.collection -p collections
+- Directly from tar archives
+  - ansible-galaxy collection install /my/collection.tar.gz -p collections
+- From a URL
+  - ansible-galaxy collection install https://my.example.local/my.collection.tar.gz -p collections
+- From Git
+  - ansible-galaxy collection install git@git.example.local:mygitaccount/mycollection.git -p collections
+- Ansible Automation Platform
+
 # Additional Notes on Content Collections
 - In ansible 2.9, collections are NOT a default part of Ansible. You would have to install individual collections
 - In ansible 2.10 and later, collections are installed by default
   - ansible-galaxy collection list
-- Content collections can be installed from different sources:
-  - galaxy.ansible.com
-  - Ansible Automation Platform
-  - Directly from tar archives
+- Regardless of whether you are using just Ansible Core or ansible-navigator in AAP, you will always have access to one content collection (ansible.builtin)
+- To get access to more collections, you may want to define and use a custom EE
+- Default collections env variable 'collections_path'
+  - works with only ansible & ansible-playbook commands but not with ansible-navigator EE
+  - can be defined within ansible.cfg 
 
 # Ansible-navigator
 - gets modules from content collections using its container-based execution environments (EEs)
