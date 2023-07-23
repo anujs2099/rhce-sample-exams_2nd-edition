@@ -39,7 +39,7 @@ Ansible Configuration File
 
 Ansible Navigator
 
--  Configure and use ansible-navigator as follows:
+-  Use ansible-navigator as follows:
    - Project directory name is task3
    - Use the inventory file & configuration file from task2
    - Find out the ansible-navigator version
@@ -47,6 +47,10 @@ Ansible Navigator
    - pull the image registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8
    - list the images available to ansible-navigator
    - list all hosts using this inventory file in json format
+-  Configure ansible-navigator configuration file as follows:
+   - Uses the image ansible-automation-platform-24/ee-supported-rhel8:latest
+   - Uses the correct pull policy such that if the image is already present, a new image is not pulled 
+   - Ensures that the playbooks that asks for a password are also supported
 
 **Task 4**
 

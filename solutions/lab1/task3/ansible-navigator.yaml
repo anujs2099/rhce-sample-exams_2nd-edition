@@ -1,0 +1,7 @@
+ansible-navigator:
+  execution-environment:
+    image: ansible-automation-platform-24/ee-supported-rhel8:latest
+    pull: 
+      policy: missing
+  playbook-artifact:
+    enable: false
