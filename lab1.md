@@ -14,6 +14,7 @@ Static Inventory Files
    - add control.example.com ansible master as a seperate host
 -  List all hosts using this inventory file
 -  List all ungrouped hosts using this inventory file
+-  Use the appropriate ansible-navigator command to list all hosts using this inventory file in json format
 -  List all hosts using the default inventory file
 
 **Task 2**
