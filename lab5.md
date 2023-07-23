@@ -52,9 +52,12 @@ Using Content Collections
    - ensure that the fact gathering is turned off
    - change the SELinux status from enabled to enforcing
    - ensure to use the appropriate collection. Check if it is already installed. If not, please install it
--  Create a collections/requirements.yaml in the current project directory to install the following collections:
-   - f5networks.f5_modules from cloud.redhat.com/api/automation-hub
-   - ansible.netcommon from galaxy.ansible.com
+-  Create a collections/requirements.yaml in the current project directory to install the following collections. Comment out the ones that throw an error:
+   - community.aws
+   - ansible.posix with version 1.2.1
+   - https://github.com/ansible-collections/community.general.git with version main
+   - /tmp/my-collection.tar.gz
+   - http://www.example.local/my-collection.tar.gz
 -  Ensure the collections from requirements.yaml gets installed in the collections/ directory
 -  Change the default collections path to include the following paths and install a new collection nginxinc.nginx_core afterwards:
    - ./collections

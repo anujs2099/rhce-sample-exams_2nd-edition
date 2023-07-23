@@ -1,5 +1,7 @@
 collections:
-- src: cloud.redhat.com/api/automation-hub
-  name: f5networks.f5_modules
-- src: galaxy.ansible.com
-  name: ansible.netcommon
+- name: community.aws
+- name: ansible.posix
+- name: git+https://github.com/ansible-collections/community.general.git
+  version: main
+#- name: /tmp/my-collection.tar.gz
+#- name: http://www.example.local/my-collection.tar.gz
