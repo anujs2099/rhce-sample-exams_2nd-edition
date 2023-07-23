@@ -1,7 +1,7 @@
 **RHCE Labs**
 
 **Setup**
-1.  Make sure you have 3 rhel 8 vmware vms ready as follows:
+1.  Make sure you have 3 rhel 9 vmware vms ready as follows:
     - cpu: 2
     - memory: 1 GiB
     - storage: 20 GB
