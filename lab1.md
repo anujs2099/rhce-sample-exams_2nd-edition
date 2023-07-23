@@ -14,7 +14,6 @@ Static Inventory Files
    - add control.example.com ansible master as a seperate host
 -  List all hosts using this inventory file
 -  List all ungrouped hosts using this inventory file
--  Use the appropriate ansible-navigator command to list all hosts using this inventory file in json format
 -  List all hosts using the default inventory file
 
 **Task 2**
@@ -34,12 +33,20 @@ Ansible Configuration File
      - All playbooks and ansible commands should run as root through sudo
      - It should not ask for the root password
    - Make sure that the new ansible.cfg is being used
+   - Find out the order of precedence about the ansible configuration files using the man pages
 
 **Task 3**
 
-Ansible Configuration File - Order of Precendence
+Ansible Navigator
 
--  Find out the order of precedence about the ansible configuration files using the man pages
+-  Configure and use ansible-navigator as follows:
+   - Project directory name is task3
+   - Use the inventory file & configuration file from task2
+   - Find out the ansible-navigator version
+   - Login to registry.redhat.io using your developers.redhat.com account to use redhat images
+   - pull the image registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8
+   - list the images available to ansible-navigator
+   - list all hosts using this inventory file in json format
 
 **Task 4**
 

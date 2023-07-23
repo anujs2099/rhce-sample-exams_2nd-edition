@@ -17,3 +17,6 @@ vi task2.cfg
 #Verify if the new configuration file is being used
 ansible --version
 ansible all -m ping
+
+apropos ansible
+man ansible-config | grep FILES -A8
