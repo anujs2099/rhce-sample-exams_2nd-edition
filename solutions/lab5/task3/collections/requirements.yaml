@@ -1,0 +1,5 @@
+collections:
+- src: cloud.redhat.com/api/automation-hub
+  name: f5networks.f5_modules
+- src: galaxy.ansible.com
+  name: ansible.netcommon

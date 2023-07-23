@@ -1,0 +1,5 @@
+{% for i in sudo_groups %}
+{% if i.sudo == true %}
+{{ i.name }} ALL=(ALL) NOPASSWD: ALL
+{% endif %}
+{% endfor %}

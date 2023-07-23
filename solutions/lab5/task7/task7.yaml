@@ -1,0 +1,10 @@
+---
+- name: install httpd
+  hosts: all
+  tasks:
+  - name: install httpd
+    import_tasks: install-and-setup.yaml
+    vars:
+      package: httpd
+      service: httpd
+    

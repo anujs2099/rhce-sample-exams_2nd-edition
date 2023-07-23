@@ -1,0 +1,15 @@
+---
+- name: assertstat.yaml
+  hosts: ansible2.example.com
+  tasks:
+  - name: get information about the /etc/ directory
+    stat:
+      path: /etc
+    register: p
+  - name: verify
+    debug:
+      var: p
+  - name: check if /etc is a directory or not
+    assert:
+      that:
+      - p.stat.isdir == true

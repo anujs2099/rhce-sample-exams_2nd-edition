@@ -1,0 +1,32 @@
+---
+  - name: install and start the servers
+    yum:
+      name:
+        - "{{ ansible_local.custom.packages.db_package }}"
+        - "{{ ansible_local.custom.packages.web_package }}" 
+      state: latest
+
+  - name: start database server
+    service:
+      name: "{{ ansible_local.custom.services.db_service }}"
+      state: started
+      enabled: true
+
+  - name: start the web service
+    service: 
+      name: "{{ ansible_local.custom.services.web_service }}"
+      state: started
+      enabled: true
+
+  - name: open the port for the web server
+    firewalld:
+      service: http
+      state: enabled
+      immediate: true
+      permanent: true
+
+  - name: create index.html
+    template:
+      src: templates/index.j2
+      dest: "{{ web_root }}/index.html"
+ 

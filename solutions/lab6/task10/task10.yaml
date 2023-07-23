@@ -1,0 +1,25 @@
+---
+- name: Managing Storage
+  gather_facts: false
+  hosts: all
+  vars:
+    disks: []
+  tasks:
+  - name: setup
+    setup: 
+    register: myfact
+  - name: set_fact
+    set_fact:
+      all_devices: "{{ myfact.ansible_facts.ansible_devices }}"
+  - name: another set_fact
+    set_fact:
+      disks: "{{ disks + [ item.key ] }}"
+    loop: "{{ all_devices|dict2items }}"
+    when: item.value.host
+  - name: all disks
+    debug:
+      var: disks
+  - name: pick 2nd disk
+    debug:
+      var: disks[1]
+

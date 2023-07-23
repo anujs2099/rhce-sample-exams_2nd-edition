@@ -1,0 +1,29 @@
+---
+- name: Install vsftp through vsftpd.j2 template
+  hosts: all
+  vars_files:
+  - vars/values
+  tasks:
+  - name: Install vsftpd
+    yum: 
+      name: vsftpd
+      state: present
+  - name: verify - variable values
+    debug: 
+      var: values
+  - name: Create vsftpd.conf
+    template:
+      src: templates/vsftpd.j2
+      dest: /etc/vsftpd/vsftpd.conf
+      backup: true
+  - name: verify - vsftpd.conf file
+    shell: |
+      echo ''
+      ls -ltr /etc/vsftpd/*vsftpd*
+      echo ''
+      cat /etc/vsftpd/vsftpd.conf | grep -i yes
+    changed_when: false
+    register: vsftpd_results
+  - name: verify - vsftpd.conf file - print results
+    debug: 
+      var: vsftpd_results

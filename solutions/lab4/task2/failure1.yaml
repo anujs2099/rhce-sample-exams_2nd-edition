@@ -1,0 +1,13 @@
+---
+- name: Dealing with Failures
+  hosts: all
+  tasks:
+  - name: task1
+    shell: |
+      echo hello world
+    register: hello
+    ignore_errors: true
+    failed_when: "'world' in hello.stdout"
+  - name: task2
+    debug: 
+      msg: hello

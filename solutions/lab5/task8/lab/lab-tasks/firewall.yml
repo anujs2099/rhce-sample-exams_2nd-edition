@@ -1,0 +1,11 @@
+---
+- name: install the firewall
+  package:
+    name: "{{ ansible_local.custom.packages.firewall }}"
+    state: latest
+
+- name: start the firewall
+  service:
+    name: "{{ ansible_local.custom.services.firewall }}"
+    state: started
+    enabled: true

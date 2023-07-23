@@ -1,0 +1,40 @@
+---
+- name: copy files
+  hosts: all
+  tasks:
+  - name: copy local file into hosts
+    copy: 
+      src: /etc/hosts
+      dest: /tmp/hosts
+  - name: add lines to /tmp/hosts
+    blockinfile: 
+      path: /tmp/hosts
+      block: |
+        192.168.4.110 host1.example.com
+        192.168.4.120 host2.example.com
+      state: present
+      backup: true
+  - name: verify checksum
+    stat:
+      path: /tmp/hosts
+      checksum_algorithm: md5 
+    register: checksum
+  - name: print checksum
+    debug:
+      msg: "{{ checksum.stat.checksum }}"
+  - name: copy /tmp/hosts from hosts to locally on ansible master
+    fetch:
+      src: /tmp/hosts
+      dest: my.hosts 
+  - name: verify
+    shell: |
+      ls -ltr /tmp/hosts*
+      echo ''
+      cat /tmp/hosts 
+    register: verify
+  - name: verify - print results
+    debug:
+      msg:
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"
+  

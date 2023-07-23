@@ -1,0 +1,14 @@
+---
+- name: Find user lisa in /etc/passwd
+  hosts: all
+  tasks:
+  - name: cat /etc/passwd
+    shell: |
+      cat /etc/passwd
+    register: passwd_contents
+  - name: Print results
+    debug:
+      msg: "passwd contains user lisa"
+    when: passwd_contents.stdout.find('lisa') != -1
+      
+

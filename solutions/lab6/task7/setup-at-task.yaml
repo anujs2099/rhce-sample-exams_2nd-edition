@@ -1,0 +1,33 @@
+---
+- name: Implementing a Playbook to Manage Processes and Tasks
+  hosts: ansible2.example.com
+  tasks:
+  - name: ensure at is installed
+    yum:
+      name: at
+      state: present
+  - name: Setup an at task
+    at:
+      command: date > /tmp/my-at-file
+      count: 1
+      units: minutes
+      unique: true
+      state: present
+  - name: Verify 
+    shell: |
+      echo ''
+      echo 'atq'
+      atq
+      echo ''
+      echo 'ls -ltr /tmp/my-at-file'
+      ls -ltr /tmp/my-at-file
+      echo ''
+      echo 'cat /tmp/my-at-file'
+      cat /tmp/my-at-file
+    register: verify
+  - name: Verify - print results
+    debug: 
+      msg: 
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"
+

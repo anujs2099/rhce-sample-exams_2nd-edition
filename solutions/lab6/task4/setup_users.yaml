@@ -1,0 +1,45 @@
+---
+- name: Implementing a Playbook to Manage Users
+  hosts: ansible1.example.com
+  vars_files:
+  - vars/groups
+  - vars/users 
+  tasks:
+
+  - name: Add groups
+    group:
+      name: "{{ item.groupname }}"
+      state: present
+    loop: "{{ groupnames }}"
+
+  - name: Add users
+    user:
+      name: "{{ item.username }}"
+      group: "{{ item.groupname }}"
+      state: present
+    loop: "{{ usernames }}"
+
+  - name: Add SSH public keys
+    authorized_key:
+      user: "{{ item.username }}"
+      state: present
+      key: "{{ lookup('file', './files' + '/{{ item.username }}' + '/id_rsa.pub') }}"
+    loop: "{{ usernames }}"
+
+  - name: Add Sales group members to sudo
+    copy:
+      content: '%sales ALL=(ALL) NOPASSWD: ALL'
+      dest: /etc/sudoers.d/sales
+
+  - name: Disable root SSH Login
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regex: '^PermitRootLogin'
+      line: 'PermitRootLogin no'
+    notify: restart ssh
+
+  handlers:
+  - name: restart ssh
+    service:
+      name: sshd
+      state: restarted

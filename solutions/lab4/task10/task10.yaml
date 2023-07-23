@@ -1,0 +1,5 @@
+---
+- name: Install nginx using an ansible galaxy role
+  hosts: ansible2.example.com
+  roles:
+  - role: geerlingguy.nginx

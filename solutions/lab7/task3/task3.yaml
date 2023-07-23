@@ -1,0 +1,27 @@
+---
+- name: Using Ansible to Manage IPv6
+  hosts: ansible2.example.com
+  tasks:
+  - name: create a connection name 'ipv6-conn'
+    nmcli:
+      conn_name: ipv6-conn
+      ifname: ens224
+      type: ethernet
+      ip6: fc00::202/64
+      gw6: fc00::1
+      dns6: 2001:4860:4860::8888
+      state: present
+  - name: verify
+    shell: |
+      echo ''
+      echo 'nmcli c show'
+      nmcli c show
+      echo ''
+      echo 'connection.id|connection.interface-name|connection.type|ipv6.addresses|ipv6.gateway|ipv6.dns'
+      nmcli c show ipv6-conn | egrep 'connection.id|connection.interface-name|connection.type|ipv6.addresses|ipv6.gateway|ipv6.dns'
+    register: verify
+  - name: verify - print results
+    debug:
+      msg:
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"

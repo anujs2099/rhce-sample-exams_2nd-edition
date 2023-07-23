@@ -1,0 +1,9 @@
+---
+- name: 
+  hosts: ansible2.example.com
+  roles:
+  - rhel-system-roles.network
+  tasks:
+  - name: include_vars
+    include_vars:
+      file: networkvars.yaml

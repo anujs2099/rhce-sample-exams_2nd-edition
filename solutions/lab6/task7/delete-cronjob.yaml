@@ -1,0 +1,32 @@
+---
+- name: Implementing a Playbook to Manage Processes and Tasks
+  hosts: ansible1.example.com
+  tasks:
+  - name: Delete a cronjob
+    cron:
+      name: "example1-cronjob"
+      cron_file: keep-alive-messages
+      user: ansible
+      state: absent
+  - name: Delete the file /etc/cron.d/keep-alive-messages
+    file:
+      path: /etc/cron.d/keep-alive-messages
+      state: absent
+  - name: Verify 
+    shell: |
+      echo ''
+      echo 'ls -ltr /etc/cron.d'
+      ls -ltr /etc/cron.d
+      echo ''
+      echo 'cat /etc/cron.d/keep-alive-messages'
+      cat /etc/cron.d/keep-alive-messages
+      echo ''
+      echo 'cat /tmp/cron-keepalive' 
+      cat /tmp/cron-keepalive
+    register: verify
+  - name: Verify - print results
+    debug: 
+      msg: 
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"
+

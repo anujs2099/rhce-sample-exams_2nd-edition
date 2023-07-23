@@ -1,0 +1,12 @@
+---
+- name: Using Collections
+  hosts: localhost
+  gather_facts: false
+  collections:
+  - ansible.posix
+  tasks:
+  - name: SELinux status change using Collections
+    selinux:
+      policy: targeted
+      state: enforcing
+ 

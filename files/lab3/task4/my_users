@@ -1,0 +1,5 @@
+my_users:
+- name: anna
+  groups: wheel
+- name: george
+  groups: users

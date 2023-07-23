@@ -1,0 +1,28 @@
+---
+- name: Install Apache vhost playbook
+  hosts: lamp
+  roles:
+  - vhost
+  tasks:
+  - name: Copy local index.html to /var/www/vhosts/{{ ansible_facts.hostname}}
+    copy: 
+      src: files/html/index.html
+      dest: /var/www/vhosts/{{ ansible_facts.hostname }}
+  - name: verify
+    shell: |
+      echo ''
+      echo 'systemctl is-active httpd'
+      systemctl is-active httpd
+      echo ''
+      echo 'systemctl is-enabled httpd'
+      systemctl is-enabled httpd
+      echo ''
+      echo 'cat /etc/httpd/conf.d/vhost.conf'
+      cat /etc/httpd/conf.d/vhost.conf
+      echo ''
+      echo 'cat /var/www/vhosts/{{ ansible_facts.hostname }}'
+      cat /var/www/vhosts/{{ ansible_facts.hostname }}
+    register: verify
+  - name: verify - print results
+    debug: 
+      var: verify

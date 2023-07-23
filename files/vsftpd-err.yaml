@@ -1,0 +1,19 @@
+---
+- name: task7-play
+  hosts: ansible2.example.com
+  tasks:
+  - name: Install vsftpd
+   yum:
+      name: vsftpd
+      state: present
+  - name: Start vsftpd
+    service:
+      name: vsftpd
+      state: started
+      enabled: true
+  - name: Create Readme
+    copy:
+      content: 'welcome to this FTP server'
+      dest: /var/ftp/pub/README
+      mode: '0444'
+      force: no

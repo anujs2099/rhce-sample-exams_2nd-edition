@@ -1,0 +1,26 @@
+---
+- name: install users using loops using hashes/dictionaries
+  hosts: all
+  vars_files:
+  - my_users
+  tasks:
+  - name: Install user {{ item.name }}
+    user: 
+      name: "{{ item.name }}"
+      groups: "{{ item.groups }}"
+    loop: "{{ my_users }}"
+  - name: Verification
+    shell: |
+      id {{ item.name }}
+      echo ''
+      cat /etc/passwd | grep -i {{ item.name }}
+    loop: "{{ my_users }}"
+    register: verify
+  - name: Verification - print output
+    debug:
+      msg: 
+      - "{{ verify.results[0].stdout_lines }}"
+      - "{{ verify.results[1].stdout_lines }}"
+
+      
+

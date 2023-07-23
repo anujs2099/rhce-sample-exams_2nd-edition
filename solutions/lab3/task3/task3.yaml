@@ -1,0 +1,22 @@
+---
+- name: Using Loops and Items
+  hosts: all
+  vars:
+    my_services:
+    - httpd
+    - vsftpd
+  tasks:
+  - name: Install package {{ my_services }}
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ my_services }}"
+  - name: Verification
+    shell: |
+      rpm -qa | grep -i httpd
+      echo ''
+      rpm -qa | grep -i vsftpd
+    register: verify
+  - name: Verification - output
+    debug:
+      var: verify

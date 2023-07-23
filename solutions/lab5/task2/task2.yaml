@@ -1,0 +1,9 @@
+---
+- name: Managing Order of Execution
+  hosts: all
+  pre_tasks:
+  - name: updating yum cache
+    yum:  
+      update_cache: true
+  roles:
+  - role: motd

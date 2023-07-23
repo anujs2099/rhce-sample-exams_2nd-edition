@@ -1,0 +1,32 @@
+TASK [all disks] ***********************************************************************************
+ok: [localhost] => {
+    "disks": [
+        "nvme0n1",
+        "sr0"
+    ]
+}
+ok: [ansible1.example.com] => {
+    "disks": [
+        "nvme0n1",
+        "sr0",
+        "nvme0n2"
+    ]
+}
+ok: [ansible2.example.com] => {
+    "disks": [
+        "nvme0n1",
+        "sr0"
+    ]
+}
+
+TASK [pick 2nd disk] *******************************************************************************
+ok: [localhost] => {
+    "disks[1]": "sr0"
+}
+ok: [ansible1.example.com] => {
+    "disks[1]": "sr0"
+}
+ok: [ansible2.example.com] => {
+    "disks[1]": "sr0"
+}
+

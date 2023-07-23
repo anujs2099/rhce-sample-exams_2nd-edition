@@ -1,0 +1,23 @@
+---
+- name: Install httpd on Redhat & memory available greater than 1512
+  hosts: all
+  tasks:
+  - name: Install httpd
+    package:
+      name: httpd
+      state: present
+    when: ansible_facts.distribution == "RedHat" and ansible_facts.memfree_mb > 1512
+  - name: Verification
+    shell: |
+      rpm -qa | grep -i httpd
+    register: verify
+  - name: Verification - Print output
+    debug:
+      msg: 
+      - "{{ verify.stdout_lines }}"
+      - "{{ verify.stderr_lines }}"
+  - name: Print the distribution & memory available
+    debug:
+      msg: 
+      - "{{ ansible_facts.distribution }}"
+      - "{{ ansible_facts.memfree_mb }}"

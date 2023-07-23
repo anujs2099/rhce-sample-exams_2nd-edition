@@ -1,0 +1,24 @@
+---
+- name: Using handlers while installing httpd
+  hosts: all
+  force_handlers: True
+  tasks:
+  - name: Install httpd
+    yum:
+      name: httpd
+      state: latest
+  - name: Copy locally available index.html to /var/www/html/
+    copy:
+      src: index.html
+      dest: /var/www/html/index.html
+    notify: restart_web
+  - name: Copy non-existent file nothing.html to /var/www/html/
+    copy:
+      src: nothing.html
+      dest: /var/www/html/nothing.html
+  handlers:
+  - name: restart_web
+    service: 
+      name: httpd
+      state: restarted
+  

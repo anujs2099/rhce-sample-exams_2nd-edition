@@ -1,0 +1,61 @@
+---
+- name: Setup a file server
+  hosts: localhost
+  vars:
+    packages:
+    - nmap
+    - httpd
+    - nginx
+  tasks:
+  - name: Install vsftp server
+    yum:
+      name: vsftpd
+      state: latest
+  - name: Start & Enable vsftp server
+    service: 
+      name: vsftpd
+      state: started
+      enabled: yes
+  - name: Open ftp port in firewall
+    firewalld:
+      service: ftp
+      permanent: yes
+      state: enabled
+      immediate: yes
+  - name: Install dnf utils
+    yum: 
+      name:
+      - dnf-utils
+      - createrepo
+      state: latest
+  - name: Download package {{ packages }}
+    yum:
+      name: "{{ item }}"
+      state: latest
+      download_only: true
+    loop: "{{ packages }}"
+  - name: Copy package to /var/ftp/pub
+    shell: |
+      find /var/cache/dnf -type f -name '{{ item }}*.rpm' -exec cp -pR {} /var/ftp/pub/ \;
+      ls -ltr /var/ftp/pub
+    loop: "{{ packages }}"
+  - name: createrepo
+    shell: |
+      createrepo /var/ftp/pub
+     
+- name: Configure repository and install a package
+  hosts: ansible*.example.com
+  vars:
+    package: nmap
+  tasks:
+  - name: Configure repository
+    yum_repository:
+      name: task3-repo
+      description: YUM repo
+      file: file
+      baseurl: ftp://control.example.com/pub/
+      gpgcheck: no
+  - name: Install package - {{ package }}
+    yum:
+      name: "{{ package }}"
+      state: present

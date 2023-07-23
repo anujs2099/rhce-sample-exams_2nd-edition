@@ -1,0 +1,9 @@
+usernames:
+- username: linda
+  groupname: sales
+- username: lori
+  groupname: sales
+- username: lisa
+  groupname: account
+- username: lucy
+  groupname: account

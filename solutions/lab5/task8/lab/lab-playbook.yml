@@ -1,0 +1,21 @@
+---
+
+- import_playbook: lab-copy-facts.yml
+
+- name: install firewall
+  hosts: all
+  tasks:
+  - name: include the tasks
+    include: lab-tasks/firewall.yml
+
+- name: install lamp stack
+  hosts: lamp
+  tasks:
+  - name: include the tasks
+    include: lab-tasks/lamp.yml
+
+- name: install file server stack
+  hosts: file
+  tasks:
+  - name: include the tasks
+    include: lab-tasks/file.yml

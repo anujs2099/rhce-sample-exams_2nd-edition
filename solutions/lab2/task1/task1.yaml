@@ -1,0 +1,19 @@
+---
+- name: Create a user
+  hosts: all
+  vars:
+    user: lisa
+  tasks:
+  - name: Create user {{ user }}
+    user:
+      name: "{{ user }}"
+      shell: /bin/bash
+  - name: Verify everything
+    shell: |
+      id {{ user }}
+      echo ''
+      cat /etc/passwd | grep -i {{ user }}
+    register: results
+  - name: Print results
+    debug:
+      var: results

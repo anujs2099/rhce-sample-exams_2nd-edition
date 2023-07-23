@@ -1,0 +1,14 @@
+---
+- name: bashversion.yaml
+  hosts: ansible2.example.com
+  tasks:
+  - name: get information about all installed packages
+    package_facts:
+      manager: auto
+  - name: print the package facts
+    debug:
+      var: ansible_facts.packages
+  - name: print the version of bash installed
+    debug:
+      msg: "Version {{ ansible_facts.packages.bash.0.version }}"
+    when: "'bash' in ansible_facts.packages"

@@ -1,0 +1,37 @@
+---
+- name: Install packages through custom facts
+  hosts: all
+  vars:
+    host_dir: /etc/ansible/facts.d
+    facts_file: myfacts.fact
+  tasks:
+  - name: Create the directory if it does not exist
+    file:
+      path: "{{ host_dir }}"
+      state: directory
+      mode: '0755'
+  - name: Install custom facts file
+    copy:
+      src: "{{ facts_file }}"
+      dest: "{{ host_dir }}/{{ facts_file }}"
+  - name: Install package {{ ansible_facts.ansible_local.myfacts.localfacts.package }}
+    yum:
+      name: "{{ ansible_facts.ansible_local.myfacts.localfacts.package }}"
+      state: present
+  - name: Start service {{ ansible_facts.ansible_local.myfacts.localfacts.service }}
+    service: 
+      name: "{{ ansible_facts.ansible_local.myfacts.localfacts.service }}"
+      state: "{{ ansible_facts.ansible_local.myfacts.localfacts.state }}"
+      enabled: true
+  - name: Verify everything
+    shell: |
+      ls -ltr {{ host_dir }}
+      echo ''
+      systemctl status {{ ansible_facts.ansible_local.myfacts.localfacts.service }}
+    register: verify
+  - name: Verify everything - Display results
+    debug:
+      var: verify
+  - name: Gathering custom facts
+    debug:
+      var: ansible_facts.ansible_local

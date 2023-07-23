@@ -1,0 +1,37 @@
+---
+- name: Implementing a Playbook to Manage Software
+  hosts: all
+  vars_files:
+  - vars/all_vars
+  tasks:
+  - name: install yum repository
+    yum_repository:
+      name: task2-repo
+      description: EPEL repository
+      file: task2-repos
+      baseurl: http://mirrorlist.repoforge.org/el7/mirrors-rpmforge
+      gpgcheck: no
+      state: present
+  - name: install package - {{ package }}
+    yum:
+      name: "{{ package }}"
+      state: present
+  - name: get information about all installed packages
+    package_facts:
+      manager: auto
+  - name: display package information about {{ package }}
+    debug: 
+      var: ansible_facts.packages.package 
+    when: package in ansible_facts.packages
+  - name: Verify
+    shell: |
+      echo ''
+      echo 'yum repolist'
+      yum repolist
+      echo ''
+      echo 'ls -ltr /etc/yum.repos.d/'
+      ls -ltr /etc/yum.repos.d/
+      echo ''
+      echo 'cat /etc/yum.repos.d/task2-repo.repo'
+      cat /etc/yum.repos.d/task2-repo.repo
+     

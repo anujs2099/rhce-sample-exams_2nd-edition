@@ -1,0 +1,40 @@
+---
+- name: Implementing a Playbook to Manage Storage
+  hosts: ansible1.example.com
+  vars_files:
+  - vars/all_vars 
+  tasks:
+  - name: create a partition if not already created
+    parted:
+      device: /dev/nvme0n2
+      number: "{{ item.number }}"
+      part_start: "{{ item.start }}"
+      part_end: "{{ item.end }}"
+      state: present 
+    loop: "{{ partition }}"
+  - name: create a vg if not already created
+    lvg:
+      vg: "{{ item.name }}"
+      pvs: "{{ item.device }}"
+      state: present
+    loop: "{{ vgs }}"
+  - name: create logical volumes if not already created
+    lvol:
+      vg: "{{ item.vgroup }}"
+      lv: "{{ item.name }}"
+      size: "{{ item.size }}"
+      state: present
+    loop: "{{ lvs }}"
+  - name: create a filesystem
+    filesystem:
+      dev: "/dev/{{ item.vgroup }}/{{ item.name }}"
+      fstype: xfs 
+    loop: "{{ lvs }}"
+  - name: mount a filesystem
+    mount: 
+      path: "{{ item.path }}"
+      src: "/dev/{{ item.vgroup }}/{{ item.name }}"
+      fstype: xfs
+      state: mounted
+    loop: "{{ lvs }}"
+    

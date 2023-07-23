@@ -1,0 +1,22 @@
+---
+- name: restart sshd service if crond service is running
+  hosts: all
+  tasks:
+  - name: checking whether crond service is running or not
+    shell: |
+      systemctl is-active crond
+    register: crond_status
+  - name: restart sshd service if crond service is running
+    service:
+      name: sshd
+      state: restarted
+    when: crond_status.rc == 0
+  - name: verification
+    shell: |
+     systemctl status crond
+     systemctl status sshd
+    register: verify
+  - name: Print crond status
+    debug:
+      msg: 
+      - "{{ verify.stdout_lines }}"

@@ -1,0 +1,20 @@
+---
+- name: install httpd
+  yum: 
+    name: httpd
+    state: present
+- name: start & enable httpd
+  service:
+    name: httpd
+    state: started
+    enabled: true
+- name: Create a directory if it does not exist
+  file:
+    path: /var/www/vhosts/
+    state: directory
+    mode: '0755'
+- name: configure an Apache vhost
+  template:
+    src: templates/vhost.conf.j2
+    dest: /etc/httpd/conf.d/vhost.conf
+    backup: true 

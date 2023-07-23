@@ -1,0 +1,80 @@
+---
+- name: setup vsftpd
+  hosts: all
+  vars: 
+  - anonymous_enable: "YES"
+  - anon_upload_enable: "YES"
+  - local_enable: "YES"
+  - write_enable: "YES"
+  - dirmessage_enable: "YES"
+  - xferlog_enable: "YES"
+  - connect_from_port_20: "YES"
+  - xferlog_std_format: "YES"
+  - listen_ipv6: "YES"
+  - userlist_enable: "YES"
+  tasks:
+  - name: Install vsftpd
+    yum:
+      name: vsftpd
+      state: present
+  - name: Start & Enable vsftpd service
+    service:
+      name: vsftpd
+      state: started
+      enabled: true
+  - name: Settings permissions
+    file:
+      path: /var/ftp/pub
+      state: directory
+      mode: '0777'
+  - name: Setting SELinux context label on SELinux policy
+    sefcontext:
+      target: '/var/ftp/pub(/.*)?' 
+      setype: public_content_rw_t
+      state: present
+  - name: run restorecon
+    shell: |
+      restorecon -irv /var/ftp/pub
+  - name: Set SELinux boolean ftpd_anon_write to on
+    seboolean:
+      name: ftpd_anon_write
+      state: true
+      persistent: true
+  - name: install selinux package
+    yum:
+      name: policycoreutils-python-utils
+      state: present
+  - name: Open firewall ports 
+    firewalld:
+      service: ftp
+      permanent: yes
+      state: enabled
+      immediate: yes
+  - name: generate /etc/vsftpd/vsftpd.conf through a template
+    template: 
+      src: templates/vsftpd.j2
+      dest: /etc/vsftpd/vsftpd.conf
+  - name: verify
+    shell: |
+      echo ''
+      echo 'systemctl is-active vsftpd'
+      systemctl is-active vsftpd
+      echo ''
+      echo 'systemctl is-enabled vsftpd'
+      systemctl is-enabled vsftpd
+      echo ''
+      echo 'firewall-cmd --list-all'
+      firewall-cmd --list-all
+      echo ''
+      echo 'cat /etc/vsftpd/vsftpd.conf'
+      cat /etc/vsftpd/vsftpd.conf
+      echo ''
+      echo 'ls -ldZ /var/ftp/pub'
+      ls -ldZ /var/ftp/pub
+      echo ''
+      echo 'semanage boolean -l | grep -i ftpd_anon_write'
+      semanage boolean -l | grep -i ftpd_anon_write
+    register: verify
+  - name: verify - print results
+    debug:
+      var: verify

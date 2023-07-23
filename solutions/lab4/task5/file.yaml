@@ -1,0 +1,19 @@
+---
+- name: create a file
+  hosts: all
+  tasks:
+  - name: create a file
+    file: 
+      path: /tmp/removeme
+      state: touch
+      owner: ansible
+      mode: '0640'
+      setype: 'public_content_rw_t'
+  - name: running verification
+    shell: |
+      ls -ltrZ /tmp/removeme
+    register: verify
+  - name: print verification results
+    debug: 
+      var: verify
+

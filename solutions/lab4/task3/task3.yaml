@@ -1,0 +1,12 @@
+---
+- name: Managing Changed Status
+  hosts: all
+  tasks:
+  - name: task1
+    shell: |
+      date
+    register: verify
+    changed_when: false
+  - name: task2
+    debug:
+      var: verify.stdout

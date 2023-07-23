@@ -1,0 +1,15 @@
+---
+- name: Install httpd using blocks
+  hosts: all
+  tasks:
+  - name: Install & Start httpd
+    block:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+    - name: Start httpd
+      service:
+        name: httpd
+        state: started
+    when: ansible_facts.distribution == "RedHat"

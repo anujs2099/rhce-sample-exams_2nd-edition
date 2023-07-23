@@ -1,0 +1,8 @@
+---
+- name: Print IP Address of hosts
+  gather_facts: False
+  hosts: all
+  tasks:
+  - name: Print IP Address
+    debug:
+      msg: This host uses IP address

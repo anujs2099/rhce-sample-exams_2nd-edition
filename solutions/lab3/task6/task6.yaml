@@ -1,0 +1,20 @@
+---
+- name: install httpd only when ansible distribution matches supported distros
+  hosts: all
+  vars_files:
+  - supported_distros
+  tasks:
+  - name: install httpd on a condition
+    yum:
+      name: httpd
+      state: present
+    when: ansible_facts.distribution in supported_distros
+  - name: Verification
+    shell: |
+      rpm -qa | grep -i httpd
+    register: verify
+  - name: Verification - print results
+    debug:
+      msg: 
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"

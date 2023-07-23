@@ -1,0 +1,28 @@
+---
+- name: selinux example
+  hosts: all
+  tasks:
+  - name: install selinux package
+    yum:
+      name: policycoreutils-python-utils
+      state: present
+  - name: change selinux context type in selinux policy
+    sefcontext:
+      target: '/tmp/removeme'
+      setype: tmp_t
+      state: present
+    notify: 
+    - 'running restorecon'
+    - 'verify'
+    - 'verify - print results'
+  handlers:
+  - name: running restorecon
+    shell: |
+      restorecon -irv /tmp/removeme
+  - name: verify
+    shell: |
+      ls -ltrZ /tmp/removeme
+    register: verify
+  - name: verify - print results
+    debug:
+      var: verify

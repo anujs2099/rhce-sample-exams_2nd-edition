@@ -1,0 +1,21 @@
+---
+- name: Implementing a Playbook to Manage Processes and Tasks
+  hosts: ansible1.example.com
+  tasks:
+  - name: Setup boot target to graphical
+    file:
+      src: /usr/lib/systemd/system/graphical.target
+      dest: /etc/systemd/system/default.target
+      state: link
+  - name: Verify 
+    shell: |
+      echo ''
+      echo 'ls -ltr /etc/systemd/system/default.target' 
+      ls -ltr /etc/systemd/system/default.target
+    register: verify
+  - name: Verify - print results
+    debug: 
+      msg: 
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"
+

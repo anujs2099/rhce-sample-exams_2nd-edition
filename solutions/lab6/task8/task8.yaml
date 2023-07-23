@@ -1,0 +1,19 @@
+---
+- name: Managing Processes and Tasks
+  hosts: ansible1.example.com
+  tasks:
+  - name: set the default boot state to multi-user.target
+    file:
+      src: /usr/lib/systemd/system/multi-user.target
+      dest: /etc/systemd/system/default.target
+      state: link
+    register: boot_var
+  - name: reboot server
+    reboot:
+    when: boot_var.changed == true
+    register: reboot_var
+  - name: successfully rebooted
+    debug:
+      msg: "successfully rebooted"
+    when: (reboot_var.changed == true) and (reboot_var.failed == false)
+   

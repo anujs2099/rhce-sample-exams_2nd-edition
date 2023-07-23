@@ -1,0 +1,31 @@
+---
+- name: Implementing a Playbook to Manage Processes and Tasks
+  hosts: ansible1.example.com
+  tasks:
+  - name: Run a cronjob
+    cron:
+      name: "example1-cronjob"
+      minute: "*/2"
+      hour: "8-18"
+      user: ansible
+      job: echo "entry written at $(date)" >> /tmp/cron-keepalive
+      cron_file: keep-alive-messages
+      state: present
+  - name: Verify 
+    shell: |
+      echo ''
+      echo 'ls -ltr /etc/cron.d'
+      ls -ltr /etc/cron.d
+      echo ''
+      echo 'cat /etc/cron.d/keep-alive-messages'
+      cat /etc/cron.d/keep-alive-messages
+      echo ''
+      echo 'cat /tmp/cron-keepalive' 
+      cat /tmp/cron-keepalive
+    register: verify
+  - name: Verify - print results
+    debug: 
+      msg: 
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"
+

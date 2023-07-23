@@ -1,0 +1,43 @@
+---
+- name: undo play
+  hosts: ansible1.example.com
+  tasks:
+  - name: Uninstall httpd
+    yum:
+      name: 
+      - httpd
+      state: absent
+  - name: remove index.html
+    file:
+      path: /var/www/html/index.html
+      state: absent
+  - name: remove http port from firewalld
+    firewalld:
+      service: http
+      permanent: yes
+      state: disabled
+      immediate: yes
+  - name: Verify everything
+    shell: |
+      echo ''
+      echo 'systemctl status httpd'
+      systemctl status httpd
+      echo ''
+      echo 'systemctl status firewalld'
+      systemctl status firewalld
+      echo ''
+      echo 'firewall-cmd --list-all'
+      firewall-cmd --list-all
+      echo ''
+      echo 'ls -ltr /var/www/html/'
+      ls -ltr /var/www/html/
+      echo ''
+      echo 'rpm -qa | grep -i httpd'
+      rpm -qa | grep -i httpd
+      echo ''
+      echo 'rpm -qa | grep -i firewalld'
+      rpm -qa | grep -i firewalld
+    register: result
+  - name: Print result
+    debug:
+      var: result

@@ -1,0 +1,35 @@
+---
+- name: Using Task Control
+  hosts: all
+  vars_files:
+  - vars/packages
+  tasks:
+  - name: Install & Run
+    block:
+    - name: Install packages
+      yum: 
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+    - name: Run mariadb-server
+      service: 
+        name: mariadb
+        state: started
+        enabled: true
+## Uncomment to always trigger the handler
+#      changed_when: true
+      notify: setup_database_root_password
+    when: (ansible_facts.distribution == 'RedHat' or ansible_facts.distribution == 'CentOS') and ansible_facts.distribution_major_version == '8'
+  handlers:
+  - name: setup_database_root_password
+    mysql_user:
+      name: root
+      password: password
+      state: present
+## Uncomment to remove the root user
+#    mysql_user:
+#      login_user: root
+#      login_password: password
+#      name: root
+#      state: absent
+

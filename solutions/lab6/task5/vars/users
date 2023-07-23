@@ -1,0 +1,7 @@
+usernames:
+- username: jack
+  groupname: developers
+- username: romero
+  groupname: admins
+- username: shanika
+  groupname: dbas

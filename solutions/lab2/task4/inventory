@@ -1,0 +1,7 @@
+localhost ansible_connection=local
+
+[web]
+ansible1.example.com user=king
+
+[db]
+ansible2.example.com user=queen

@@ -1,0 +1,19 @@
+---
+- name: Generate /etc/hosts dynamically
+  hosts: all
+  tasks:
+  - name: generate /etc/hosts 
+    template:
+      src: templates/hosts.j2
+      dest: /etc/hosts
+      backup: true
+  - name: verify
+    shell: |
+      ls -ltr /etc/hosts*
+      echo ''
+      echo ''
+      cat /etc/hosts
+    register: verify
+  - name: verify - print output
+    debug:
+      var: verify

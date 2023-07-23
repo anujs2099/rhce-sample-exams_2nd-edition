@@ -1,0 +1,56 @@
+---
+- name: Understanding Modules for Network Management
+  hosts: ansible2.example.com
+  tasks:
+  - name: create a new connection name for ens224 interface
+    nmcli:
+      conn_name: new-conn
+      ifname: ens224
+      ip4: 10.0.0.10/24
+      type: ethernet
+      state: present
+  - name: set hostname to ansible2.example.com
+    hostname:
+      name: ansible2.example.com
+  - name: move ens224 to internal zone
+    firewalld:
+      zone: internal
+      interface: ens224
+      permanent: true
+      immediate: true
+      state: enabled
+  - name: enable http service
+    firewalld:
+      zone: internal
+      service: http
+      permanent: true
+      immediate: true
+      state: enabled
+
+- name: Verify
+  hosts: ansible2.example.com
+  tasks:
+  - name: verify
+    shell: |
+      echo ''
+      echo 'nmcli c show'
+      nmcli c show
+      echo ''
+      echo 'nmcli c show new-conn | grep IP4.ADDRESS'
+      nmcli c show new-conn | grep IP4.ADDRESS
+      echo ''
+      echo 'hostname'
+      hostname
+      echo ''
+      echo 'firewall-cmd --list-all --zone internal'
+      firewall-cmd --list-all --zone internal
+    register: verify 
+  - name: verify - print results
+    debug:
+      msg: 
+      - "{{ verify.stderr_lines }}"
+      - "{{ verify.stdout_lines }}"
+
+
+  
+      
