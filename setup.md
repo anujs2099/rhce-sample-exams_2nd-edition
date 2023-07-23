@@ -18,10 +18,9 @@
 2.  Setup all nodes as student user by running the following scripts in the order they are numbered and only on the nodes mentioned in the filename:
     - sudo sh install-scripts/0-all-nodes_after-restoring-snapshot.sh
     - sudo sh install-scripts/1-control-node_install-ansible.sh
-    - sudo sh install-scripts/2-all-nodes_install-python.sh
-    - sudo sh install-scripts/3-all-nodes_create-dedicated-user_setup-sudo.sh
+    - sudo sh install-scripts/2-all-nodes_create-dedicated-user_setup-sudo.sh
     - Provide password for ansible user twice in this step which is just password
-      - sh install-scripts/4-control-node_setup-passwordless-ssh.sh
+      - sh install-scripts/3-control-node_setup-passwordless-ssh.sh
 3.  Management node "control" requirements:
     - use ansible user from now on
     - bashrc requirements: Make sure to copy/paste the below lines in your ~/.bashrc and then source it
