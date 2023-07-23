@@ -47,6 +47,12 @@ Ansible Navigator
    - pull the image registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8
    - list the images available to ansible-navigator
    - list all hosts using this inventory file in json format
+   - list the images available to ansible-navigator while ensuring it doesn't pull a newer image
+-  Using help with ansible-navigator:
+   - list all the modules you can get help for
+   - get help about the ping module
+   - get help about the firewalld module
+   - list all the roles you can get help for 
 -  Configure ansible-navigator configuration file as follows:
    - Uses the image ansible-automation-platform-24/ee-supported-rhel8:latest
    - Uses the correct pull policy such that if the image is already present, a new image is not pulled 
@@ -54,10 +60,11 @@ Ansible Navigator
 
 **Task 4**
 
-Using help regarding Modules
+Using help with Modules using the ansible-doc command
 
--  Using appropriate command, list all the examples of using ping module
--  Using appropriate command, find out the mandatory arguments for copy module
+-  List all the examples of using ping module
+-  Find out the mandatory arguments for copy module
+-  Get help about the firewalld module. You would notice that it won't work as this module comes from a content collection that is not installed by default in ansible > 2.10
 
 **Task 5**
 
