@@ -30,7 +30,7 @@ ansible-playbook task9.yaml
 ansible-playbook task9.yaml
 # Notice the handler did not run this time
 
-ansible-doc meta | less
+ansible-doc meta | grep EXAMPLES -A3000 | less
 
 ## Note that handlers would not execute:
 # if any of the tasks fail (force with force_handlers: True)
