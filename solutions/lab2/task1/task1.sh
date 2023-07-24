@@ -7,6 +7,7 @@ cp ../../lab1/task2/inventory .
 cp ../../lab1/task2/ansible.cfg .
 
 vi task1.yaml
+ansible-doc -t keyword vars 
 ansible-doc user | grep '^='
 ansible-doc user | grep EXAMPLES -A3000 | less
 vi task1.yaml

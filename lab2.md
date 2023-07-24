@@ -19,6 +19,7 @@ Variables defined in playbook (Play scope)
    - using the variable file users.yaml located within the directory vars/ 
    - roger is defined within this variable file users.yaml
    - make sure the user uses the shell /bin/bash
+-  Create a playbook that creates a user where the username is asked during the playbook execution
 
 **Task 3**
 

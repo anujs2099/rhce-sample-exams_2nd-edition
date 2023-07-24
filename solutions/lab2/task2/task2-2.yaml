@@ -1,0 +1,21 @@
+---
+- name: Create a user
+  hosts: all
+  vars_prompt:
+  - name: username
+    prompt: What is your username?
+    private: false
+  tasks:
+  - name: Create user {{ username }}
+    user:
+      name: "{{ username }}"
+      shell: /bin/bash
+  - name: Verify everything
+    shell: |
+      id {{ username }}
+      echo ''
+      cat /etc/passwd | grep -i {{ username }}
+    register: results
+  - name: Print results
+    debug:
+      var: results
