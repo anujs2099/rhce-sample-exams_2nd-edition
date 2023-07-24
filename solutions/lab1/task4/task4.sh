@@ -23,3 +23,5 @@ ansible-doc -t filter password_hash | less
 
 ansible-doc -t keyword -l | less
 ansible-doc -t keyword delegate_to | less
+
+Go to docs.ansible.com --> ansible core --> ansible core documentation --> in the search, type sefcontext

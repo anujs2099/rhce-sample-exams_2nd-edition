@@ -70,6 +70,7 @@ Getting help with ansible-doc command
 -  Get help about the password_hash filter
 -  List all the keywords (statements) you can get help for
 -  Get help about the delegate_to keyword (statement)
+-  Find out which collection sefcontext module belongs to
 
 **Task 5**
 
