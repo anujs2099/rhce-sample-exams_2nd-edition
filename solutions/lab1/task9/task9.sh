@@ -24,5 +24,10 @@ ansible-doc uri | egrep EXAMPLES -A3000 | less
 vi task9.yaml
 ansible-playbook --syntax-check task9.yaml
 ansible-playbook task9.yaml
+Go to docs.ansible.com --> ansible core --> ansible core documentation --> in the search box, type "firewalld" 
+mkdir collections
+ansible-galaxy collection install ansible.posix -p collections/
+ansible-galaxy collection list
+ansible-playbook task9.yaml
 ansible all -m shell -a "cat /var/www/html/index.html; echo ''; systemctl status httpd; echo ''; systemctl status firewalld; echo ''; firewall-cmd --list-all"
 curl http://ansible1.example.com
