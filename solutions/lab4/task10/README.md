@@ -103,6 +103,9 @@ $ tree myrole/
 
 # Ansible-navigator
 - gets modules from content collections using its container-based execution environments (EEs)
+- ansible-navigator.yaml configuration file can be created within:
+  - user home directory
+  - current project directory
 
 
 

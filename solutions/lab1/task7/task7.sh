@@ -37,4 +37,4 @@ ansible ansible2.example.com -m file -a "name=/var/ftp/pub/README state=absent"
 ansible ansible2.example.com -m shell -a "cat /var/ftp/pub/README"
 
 ansible-navigator --pp never -m stdout run task7.yaml 
-
+cat task7-artifact-2023-07-24T01\:02\:48.756688+00\:00.json | jq .stdout

@@ -53,7 +53,7 @@ Ansible Navigator & Getting help with it
    - get help about the ping module
    - get help about the firewalld module
    - list all the roles you can get help for 
--  Configure ansible-navigator configuration file as follows:
+-  Configure ansible-navigator configuration file in the present project directory as follows:
    - Uses the image ansible-automation-platform-24/ee-supported-rhel8:latest
    - Uses the correct pull policy such that if the image is already present, a new image is not pulled 
    - Ensures that the playbooks that asks for a password are also supported
