@@ -22,6 +22,9 @@ ansible-playbook task6.yaml
 # copy
 # fetch
 # file
+# stat
+# synchronize
+# patch
 
 ## Common SELinux Modules
 # file (equal to chcon - sets SELinux context directly on the file)

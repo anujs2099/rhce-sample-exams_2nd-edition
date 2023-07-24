@@ -45,12 +45,18 @@ $ tree myrole/
 - You can write your own roles
 - For RHEL, the rhel-system-roles package is available
 - The community provides roles through the Ansible Galaxy website (galaxy.ansible.com)
+- As tar balls
+- From RPM packages
+- Through Ansible Content Collections from Red Hat automation hub at https://console.redhat.com
 
 # Roles precendence order (highest to lowest order)
 - ./roles in project directory
 - ~/.ansible/roles 
 - /etc/ansible/roles
 - /usr/share/ansible/roles
+
+# How to install Roles
+- ansible-galaxy role install abc-role -p mypath
 
 # Additional Notes on Roles
 - role tasks will run before any task that is defined in a playbook
@@ -63,6 +69,9 @@ $ tree myrole/
   - playbook tasks
   - post_tasks
   - handlers
+- Default roles env variable 'roles_path'
+  - works with only ansible & ansible-playbook commands but not with ansible-navigator EE
+  - can be defined within ansible.cfg
 
 # Content Collections
 # Content Collections include the following

@@ -24,5 +24,5 @@ ansible-playbook task7.yaml
 # for advanced modifications, use template module with a template .j2 file
 
 ## To prevent administrators from overwriting files that are managed by Ansible
-# in ansible.cfg set ansible_managed = Ansible managed
-# On top of the Jinja2 template, set the {{ ansible_managed }} variable
+# in ansible.cfg set 'ansible_managed = # Ansible managed'
+# On top of the Jinja2 template, set the '# {{ ansible_managed }}' variable

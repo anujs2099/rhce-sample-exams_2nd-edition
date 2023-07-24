@@ -38,3 +38,6 @@ ansible-playbook copy.yaml
 # copy
 # fetch
 # file
+# stat
+# synchronize
+# patch
