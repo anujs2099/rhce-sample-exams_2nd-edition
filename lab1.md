@@ -117,6 +117,9 @@ Working with Playbooks --> Write an Ansible Playbook as follows
 -  Verify the syntax of the playbook before running it
 -  Check the output of the playbook without running it
 -  Run the playbook and verify that it worked
+-  Using ansible-navigator:
+   - delete the changes made by the playbook
+   - Run the playbook from ansible-navigator and verify that it worked
 
 **Task 8**
 
