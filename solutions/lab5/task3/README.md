@@ -60,6 +60,7 @@ $ tree myrole/
 
 # Additional Notes on Roles
 - role tasks will run before any task that is defined in a playbook
+- use roles: section in the play header OR import_role: / include_role: module in a task
 - use pre_tasks statement to define playbook tasks that needs to be run before role tasks
 - use post_tasks statement to define playbook tasks that needs to be run after all playbook & role tasks
 - Order of Execution (first to last)
