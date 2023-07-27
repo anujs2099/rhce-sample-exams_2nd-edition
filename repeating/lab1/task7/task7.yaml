@@ -2,20 +2,20 @@
 - name: Working with Playbooks
   hosts: ansible2.example.com
   tasks:
-  - name: Install a package
-    yum: 
+  - name: install vsftpd
+    yum:
       name: vsftpd
       state: present
-  - name: Start & Enable vsftpd
+  - name: start & enable vsftpd
     service:
       name: vsftpd
       state: started
       enabled: true
-  - name: Create a readme file /var/ftp/pub/README
+  - name: create readme file 
     copy:
       content: 'welcome to this FTP server'
       dest: /var/ftp/pub/README
-
-    
-    
-   
+      mode: '0444'
+      force: false
+      
+      

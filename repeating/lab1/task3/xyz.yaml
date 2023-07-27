@@ -1,0 +1,16 @@
+usage: ansible-config init [-h] [-v] [-c CONFIG_FILE] [-t {all,base,become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,vars}] [--format {ini,env,vars}] [--disabled] [args ...]
+
+positional arguments:
+  args                  Specific plugin to target, requires type of plugin to be set
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         Causes Ansible to print more debug messages. Adding multiple -v will increase the verbosity, the builtin plugins currently evaluate up to -vvvvvv. A reasonable level to start is -vvv, connection debugging might
+                        require -vvvv.
+  -c CONFIG_FILE, --config CONFIG_FILE
+                        path to configuration file, defaults to first file found in precedence.
+  -t {all,base,become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,vars}, --type {all,base,become,cache,callback,cliconf,connection,httpapi,inventory,lookup,netconf,shell,vars}
+                        Filter down to a specific plugin type.
+  --format {ini,env,vars}, -f {ini,env,vars}
+                        Output format for init
+  --disabled            Prefixes all entries with a comment character to disable them

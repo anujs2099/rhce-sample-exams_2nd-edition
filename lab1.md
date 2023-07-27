@@ -95,7 +95,6 @@ Using Essential modules
 -  Using appropriate command, reboot ansible2.example.com and verify it has been rebooted
 -  Using appropriate command, list all the shell variables on all hosts
 -  Using appropriate command, modify the file /etc/motd to include only the words 'hello world'
--  Remove python3 from the host ansible2.example & then assuming ansible user is not present, install python on the host
 
 **Task 7**
 
@@ -117,8 +116,8 @@ Working with Playbooks --> Write an Ansible Playbook as follows
 -  Verify the syntax of the playbook before running it
 -  Check the output of the playbook without running it
 -  Run the playbook and verify that it worked
+-  Delete the changes made by the playbook
 -  Using ansible-navigator:
-   - delete the changes made by the playbook
    - Run the playbook from ansible-navigator and verify that it worked
 
 **Task 8**
