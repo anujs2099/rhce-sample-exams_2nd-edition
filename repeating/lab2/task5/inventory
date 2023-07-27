@@ -1,4 +1,5 @@
-localhost ansible_connection=local
+
+control.example.com ansible_connection=local
 
 [web]
 ansible1.example.com
@@ -6,6 +7,6 @@ ansible1.example.com
 [db]
 ansible2.example.com
 
-[thorn]
+[all]
 ansible1.example.com
 ansible2.example.com

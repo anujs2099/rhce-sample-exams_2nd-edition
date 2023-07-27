@@ -1,0 +1,18 @@
+---
+- name: Undo playbook
+  hosts: ansible1.example.com
+  tasks:
+  - name: Block http service from firewalld
+    firewalld:
+      service: http
+      state: disabled
+      permanent: true
+      immediate: true
+  - name: remove index.html
+    file: 
+      path: /var/www/html/index.html
+      state: absent
+  - name: uninstall httpd
+    yum: 
+      name: httpd
+      state: absent

@@ -48,8 +48,8 @@ Variables defined from inventory file which are assigned to a host group (Host s
 -  Project directory name is task5
 -  Use the inventory file & configuration file from task1
 -  Create a playbook that runs on all hosts as follows:
-   - create a new host group by the name "all" within the inventory including both ansible1.example.com & ansible2.example.com
-   - create a user by the name "james" assigned to the host group "all"
+   - create a new host group by the name "jazz" within the inventory including both ansible1.example.com & ansible2.example.com
+   - create a user by the name "james" assigned to the host group "jazz" within the inventory file
    - make sure the user uses the shell /bin/bash
 
 **Task 6**
@@ -71,8 +71,8 @@ Variables defined using include files for groups (Host scope)
 -  Project directory name is task7
 -  Use the inventory file & configuration file from task1
 -  Create a playbook as follows:
-   - create a new host group by the name "all" within the inventory including both ansible1.example.com & ansible2.example.com
-   - using the group vars directory, define the user "teddy" for the group "all"
+   - create a new host group by the name "thorn" within the inventory including both ansible1.example.com & ansible2.example.com
+   - using the group vars directory, define the user "teddy" for the group "thorn"
    - make sure the user uses the shell /bin/bash
    - make sure the user is not defined within the playbook or within the inventory 
 

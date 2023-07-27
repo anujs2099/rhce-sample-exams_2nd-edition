@@ -1,0 +1,47 @@
+---
+- name: enable webserver
+  hosts: ansible1.example.com
+  tasks:
+  - name: install httpd & firewalld
+    yum: 
+      name: 
+      - httpd
+      - firewalld
+      state: present
+  - name: install index.html
+    copy: 
+      content: 'hello world'
+      dest: /var/www/html/index.html
+  - name: start httpd
+    service:
+      name: httpd
+      state: started
+      enabled: true
+  - name: start firewalld
+    service:
+      name: firewalld
+      state: started
+      enabled: true
+  - name: open http service in firewalld
+    firewalld:
+      service: http
+      state: enabled
+      permanent: true
+      immediate: true
+
+- name: test webserver access
+  hosts: localhost
+  remote_user: ansible
+  become: false
+  tasks:
+  - name: test connectivity
+    uri:
+      url: http://ansible1.example.com
+      return_content: true
+    register: output
+  - name: test connectivity - display webpage
+    debug:
+      var: output.content
+    
+     
+    
