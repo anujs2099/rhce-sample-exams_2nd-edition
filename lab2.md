@@ -107,8 +107,8 @@ Using Ansible Vault - prompted for password
 -  Project directory name is task9
 -  Use the inventory file & configuration file from task1
 -  Create a ansible-vault encrypted file secret.yaml with the following variables:
-   - username: nano
-   - pwhash: password
+   - username is nano
+   - password is password
 -  Create a playbook as follows:
    - runs on all hosts
    - uses vars present within secret.yaml
@@ -122,8 +122,8 @@ Using Ansible Vault - using a password-file
 -  Project directory name is task10
 -  Use the inventory file & configuration file from task1
 -  Create a ansible-vault encrypted file secret.yaml with the following variables:
-   - username: alpha
-   - pwhash: password
+   - username is alpha
+   - password is password
 -  Save the password that you used to encrypt secret.yaml to a file vault-pass
 -  Ensure that only ansible user has read & write permissions to vault-pass
 -  Create a playbook as follows:
