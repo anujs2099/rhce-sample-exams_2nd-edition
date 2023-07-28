@@ -7,3 +7,5 @@
   - name: create a user
     user:
       name: "{{ username }}"
+      password: "{{ pwhash }}"
+      state: present
