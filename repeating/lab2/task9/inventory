@@ -1,0 +1,8 @@
+
+control.example.com ansible_connection=local
+
+[web]
+ansible1.example.com
+
+[db]
+ansible2.example.com

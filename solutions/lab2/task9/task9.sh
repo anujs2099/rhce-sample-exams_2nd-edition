@@ -7,7 +7,10 @@ cp ../task1/inventory .
 cp ../task1/ansible.cfg .
 
 echo "username: nano" > secret.yaml
-echo "pwhash: password" >> secret.yaml
+Go to docs.ansible.com --> ansible core --> ansible core documentation --> frequently asked questions --> ctrl + F and search for password
+ansible all -i localhost, -m debug -a "msg={{ 'password' | password_hash('sha512', 'mysecretsalt') }}"
+vi secret.yaml
+# Paste the hashed value as password
 cat secret.yaml
 ansible-vault encrypt secret.yaml
 # Provide a password
@@ -31,3 +34,6 @@ ansible-playbook --ask-vault-pass --syntax-check task9.yaml
 # Provide the same password
 ansible-playbook --ask-vault-pass task9.yaml
 # Provide the same password
+id nano
+su - nano
+# Provide the password of user nano to test if login works
