@@ -1,0 +1,11 @@
+---
+- name: Using when to run tasks conditionally
+  hosts: all
+  vars_files:
+  - supported_distros
+  tasks:
+  - name: install httpd based on distrubtion
+    package:
+      name: httpd
+      state: present
+    when: ansible_distribution in supported_distros

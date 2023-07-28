@@ -1,0 +1,8 @@
+---
+- name: Working with Facts
+  hosts: all
+  tasks:
+  - name: print a message
+    debug:
+      msg: 
+      - "This host uses IP address {{ ansible_facts.default_ipv4.address }}"

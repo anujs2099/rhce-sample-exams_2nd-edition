@@ -1,0 +1,14 @@
+---
+- name: Combining Loops and Conditionals
+  hosts: all
+  tasks:
+  - name: check if crond service is running
+    shell: |
+      systemctl is-active crond
+    ignore_errors: true
+    register: output
+  - name: restart sshd service if crond service is running
+    service:
+      name: sshd
+      state: restarted
+    when: output.rc == 0

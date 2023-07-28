@@ -1,0 +1,14 @@
+---
+- name: Using Loops and Items - simple example
+  hosts: all
+  vars:
+    my_services:
+    - httpd
+    - vsftpd
+  tasks:
+  - name: install package
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ my_services }}"
+ 

@@ -6,7 +6,9 @@ cd task2/
 cp ../../lab1/task2/inventory .
 cp ../../lab1/task2/ansible.cfg .
 
-ansible all -m shell -a "mkdir -p /etc/ansible/facts.d/; touch /etc/ansible/facts.d/myfact.fact; ls -ltr /etc/ansible/facts.d/; echo 'testing: true' >> /etc/ansible/facts.d/myfact.fact"
+ansible-config init | less
+/fact
+/n
 
 ansible-doc setup | grep '^='
 ansible-doc setup | grep EXAMPLES -A3000 | less

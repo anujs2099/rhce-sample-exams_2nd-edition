@@ -1,0 +1,14 @@
+---
+- name: Using Register Variables
+  hosts: all
+  vars:
+    username: lisa
+  tasks:
+  - name: cat /etc/passwd
+    shell: |
+      cat /etc/passwd
+    register: output
+  - name: print a message
+    debug: 
+      msg: "passwd contains user {{ username }}"
+    when: output.stdout.find('{{ username }}') != -1

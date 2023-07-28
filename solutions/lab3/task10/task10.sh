@@ -8,6 +8,7 @@ cp ../../lab1/task2/ansible.cfg .
 
 ansible all -m yum -a "name=httpd state=absent"; ansible all -m file -a "path=/var/www/html/index.html state=absent"
 
+ansible-doc -t keyword block
 vi task10.yaml
 ansible-doc yum | grep EXAMPLES -A3000 | less
 vi task10.yaml

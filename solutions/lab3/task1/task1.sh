@@ -26,11 +26,15 @@ vi ipfact.yaml
 ansible-playbook --syntax-check ipfact.yaml
 ansible-playbook ipfact.yaml
 
-cat /etc/ansible/ansible.cfg | grep -i _facts_
+ansible-config init | less
+# type /fact
+# type n multiple times
 vi ansible.cfg
 
 cp ipfact.yaml disablefact.yaml
-cat /etc/ansible/ansible.cfg | grep -i gather_facts
+ansible-config init | less
+# type /gather_fact
+# type n multiple times
 vi disablefact.yaml
 ansible-playbook --syntax-check disablefact.yaml
 ansible-playbook disablefact.yaml

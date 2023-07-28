@@ -1,0 +1,9 @@
+---
+- name: Working with Facts
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: print a message
+    debug:
+      msg: 
+      - "hello world"

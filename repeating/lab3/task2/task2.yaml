@@ -1,0 +1,27 @@
+---
+- name: Creating Custom Facts
+  hosts: all
+  vars:
+    fact_dir: /etc/ansible/facts.d
+    fact_file: myfacts.fact
+  tasks:
+  - name: ensure the {{ fact_dir }} is created
+    file:
+      path: "{{ fact_dir }}"
+      state: directory
+  - name: copy the {{ fact_file }} custom fact file to {{ fact_dir }}
+    copy:
+      src: "{{ fact_file }}"
+      dest: "{{ fact_dir }}/{{ fact_file }}"
+  - name: install package
+    yum: 
+      name: "{{ ansible_local.myfacts.localfacts.package }}"    
+      state: present
+  - name: start service
+    service:
+      name: "{{ ansible_local.myfacts.localfacts.service }}"
+      state: "{{ ansible_local.myfacts.localfacts.state }}"
+      enabled: true
+  - name: display on the custom facts
+    debug:
+      var: ansible_facts.ansible_local

@@ -1,0 +1,23 @@
+---
+- name: Using Loops and Items
+  hosts: all
+  vars_files:
+  - my_users
+  tasks:
+  - name: create user
+    user: 
+      name: "{{ item.name }}"
+      groups: "{{ item.groups }}" 
+      state: present
+    loop: "{{ my_users }}"
+  - name: verify
+    shell: |
+      id "{{ item.name }}"
+    loop: "{{ my_users }}"
+    register: output
+  - name: display output
+    debug:
+      msg: 
+      - "{{ output.results[0].stdout_lines }}"
+      - "{{ output.results[1].stdout_lines }}"
+ 
