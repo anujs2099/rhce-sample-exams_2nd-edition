@@ -1,0 +1,11 @@
+---
+- name: using modules to manipulate files
+  hosts: all
+  tasks:
+  - name: create a file
+    file:
+      path: /tmp/removeme
+      owner: ansible
+      mode: '0640'
+      setype: 'public_content_rw_t'
+      state: touch

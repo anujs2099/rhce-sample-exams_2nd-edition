@@ -1,0 +1,25 @@
+---
+- name: using jinja templates
+  hosts: all
+  vars:
+    anonymous_enable: "YES"
+    local_enable: "YES"
+    write_enable: "YES"
+    anon_upload_enable: "YES"
+  tasks:
+  - name: install vsftpd
+    yum:
+      name: vsftpd
+      state: present
+ 
+  - name: start vsftpd service
+    service:
+      name: vsftpd
+      state: started
+      enabled: true
+
+  - name: copy over vsftpd.conf on the hosts
+    template:
+      src: templates/vsftpd.j2
+      dest: /etc/vsftpd/vsftpd.conf
+      backup: true

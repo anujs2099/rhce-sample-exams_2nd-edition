@@ -1,0 +1,19 @@
+---
+- name: managing selinux file context
+  hosts: all
+  tasks:
+  - name: install selinux package
+    yum:
+      name: policycoreutils-python-utils
+      state: present
+  - name: change selinux context type on /tmp/removeme
+    sefcontext:
+      target: /tmp/removeme
+      setype: tmp_t
+      state: present
+    notify: apply new SeLinux file context
+
+  handlers:
+  - name: apply new SeLinux file context
+    command: restorecon -irv /tmp/removeme
+

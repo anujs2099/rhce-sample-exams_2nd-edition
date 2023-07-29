@@ -1,0 +1,31 @@
+---
+- name: using modules to manipulate files
+  hosts: all
+  tasks:
+  - name: copy local /etc/host file into /tmp on the hosts
+    copy:
+      src: /etc/hosts
+      dest: /tmp/hosts
+
+  - name: add more lines to the newly copied /etc/hosts
+    blockinfile:
+      path: /tmp/hosts
+      block: |
+        192.168.4.110 host1.example.com
+        192.168.4.120 host2.example.com
+      backup: true
+      state: present
+
+  - name: verify file checksum for /tmp/hosts
+    stat:
+      path: /tmp/hosts
+      checksum_algorithm: md5
+    register: st
+  - name: print checksum results
+    debug:
+      var: st.stat.checksum
+      
+  - name: obtain /tmp/hosts from the remote machines
+    fetch: 
+      src: /tmp/hosts
+      dest: my.hosts/

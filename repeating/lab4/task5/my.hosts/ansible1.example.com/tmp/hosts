@@ -1,0 +1,10 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.174.143 control control.example.com
+192.168.174.144 ansible1 ansible1.example.com
+192.168.174.145 ansible2 ansible2.example.com
+# BEGIN ANSIBLE MANAGED BLOCK
+192.168.4.110 host1.example.com
+192.168.4.120 host2.example.com
+# END ANSIBLE MANAGED BLOCK
