@@ -1,0 +1,13 @@
+---
+- name: Dealing with Failures
+  hosts: all
+  ignore_errors: true
+  tasks:
+  - name: run a command 
+    shell: |
+      echo "hello world"
+    register: output
+    failed_when: output.stdout.find('world') != -1
+  - name: display a message
+    debug:
+      msg: "hello"

@@ -57,7 +57,7 @@ Using Task Control
    - install and run the mariadb database service
    - it should install the mariadb-server as well as the python3-PyMySQL package. Make sure to use variables & loop statement
    - it should only install on managed nodes that are using version 8 of RHEL or CentOS
-   - Only if the database service could be started successfully, the mysql_user module should be used to set the database root user password
+   - Only if the mariadb could be installed & started successfully, the mysql_user module should be used to set the database root user password
    - ensure that the changes persist across reboots
 
 **Task 5**

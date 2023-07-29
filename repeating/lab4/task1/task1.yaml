@@ -1,0 +1,21 @@
+---
+- name: Combining Tasks using Block, Rescue & Always
+  hosts: all
+  tasks:
+  - name: Main Block
+    block:
+    - name: remove the file /var/www/html/index.html
+      file: 
+        path: /var/www/html/index.html
+        state: absent
+
+    rescue:
+    - name: create the file /tmp/rescuefile
+      file:
+        path: /tmp/rescuefile
+        state: touch
+
+    always:
+    - name: write a message to logs
+      shell: |
+        logger "hello"

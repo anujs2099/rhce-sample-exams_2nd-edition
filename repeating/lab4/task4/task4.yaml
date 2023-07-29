@@ -1,0 +1,26 @@
+---
+- name: using task control
+  hosts: all
+  tasks:
+  - name: install mariadb database service
+    package: 
+      name: 
+      - mariadb-server
+      - python3-PyMySQL
+      state: present
+    when: (ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS') and ansible_distribution_major_version == '9'
+ 
+  - name: start mariadb database service
+    service:
+      name: mariadb
+      state: started
+      enabled: true
+    changed_when: true
+    notify: set_root_password
+
+  handlers:
+  - name: set_root_password
+    mysql_user:
+      name: root
+      password: password
+      state: present

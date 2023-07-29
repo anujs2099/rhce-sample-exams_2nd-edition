@@ -1,0 +1,13 @@
+---
+- name: managing changed status
+  hosts: all
+  tasks:
+  - name: check local time
+    shell: |
+      date
+    register: output
+    changed_when: false
+
+  - name: print output
+    debug:
+      var: output.stdout 
