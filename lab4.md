@@ -56,8 +56,9 @@ Using Task Control
 -  Write a playbook as follows:
    - install and run the mariadb database service
    - it should install the mariadb-server as well as the python3-PyMySQL package. Make sure to use variables & loop statement
-   - it should only install on managed nodes that are using version 8 of RHEL or CentOS
+   - it should only install on managed nodes that are using version 9 of RHEL or CentOS
    - Only if the mariadb could be installed & started successfully, the mysql_user module should be used to set the database root user password
+     - it is okay if you get a access denied message
    - ensure that the changes persist across reboots
 
 **Task 5**
