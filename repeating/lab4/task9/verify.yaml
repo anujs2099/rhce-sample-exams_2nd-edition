@@ -1,0 +1,13 @@
+---
+- name: verify playbook
+  hosts: localhost
+  tasks:
+  - name: install lftp
+    yum:
+      name: lftp
+      state: present
+  - name: verify
+    shell: |
+      lftp -u ansible,password ansible1.example.com <<EOF
+      put /etc/hosts
+      EOF

@@ -1,0 +1,7 @@
+---
+- name: understanding roles
+  hosts: ansible2.example.com
+  tasks:
+  - name: include role to install nginx
+    include_role: 
+      name: geerlingguy.nginx

@@ -1,0 +1,65 @@
+---
+- name: deploying files with templates
+  hosts: all
+  vars:
+    anonymous_enable: "YES"
+    local_enable: "YES"
+    write_enable: "YES"
+    anon_upload_enable: "YES"
+    packages: 
+    - vsftpd
+    - firewalld
+    vsftpd_conf: /etc/vsftpd/vsftpd.conf
+    vsftpd_pub_dir: /var/ftp/pub
+  tasks:
+  - name: install "{{ packages }}"
+    yum: 
+      name: "{{ item }}"
+      state: present
+    loop: "{{ packages }}"
+
+  - name: start and enable "{{ packages }}"
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: true
+    loop: "{{ packages }}"
+
+  - name: open ftp service in firewall
+    firewalld:
+      service: ftp
+      permanent: true
+      immediate: true
+      state: enabled
+ 
+  - name: copy over "{{ vsftpd_conf }}"
+    template:
+      src: templates/vsftpd.j2
+      dest: "{{ vsftpd_conf }}"
+  
+  - name: make sure {{ vsftpd_pub_dir }} is world accessible
+    file:
+      path: "{{ vsftpd_pub_dir }}"
+      state: directory
+      mode: '0777'
+
+  - name: ensuring policycore selinux package is installed
+    yum:
+      name: policycoreutils-python-utils
+      state: present 
+
+  - name: set the correct setype on "{{ vsftpd_pub_dir }}" in selinux policy
+    sefcontext:
+      target: "{{ vsftpd_pub_dir }}(/.*)?"
+      setype: 'public_content_rw_t'
+      state: present
+  - name: set the correct setype on "{{ vsftpd_pub_dir }}"
+    command:
+      restorecon -irv "{{ vsftpd_pub_dir }}"
+
+  - name: turn on the selinux boolean ftpd_anon_write 
+    seboolean:
+      name: ftpd_anon_write
+      state: true
+      persistent: true
+

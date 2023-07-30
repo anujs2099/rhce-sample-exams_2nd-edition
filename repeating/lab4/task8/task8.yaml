@@ -1,2 +1,9 @@
 ---
-- name: 
+- name: using control structures in jinja2 templates
+  hosts: all
+  tasks:
+  - name: copy template file as /etc/hosts on the hosts
+    template:
+      src: templates/hosts.j2
+      dest: /etc/hosts
+      backup: true
